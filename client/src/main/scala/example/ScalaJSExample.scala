@@ -2,15 +2,15 @@ package example
 
 import com.thoughtworks.binding.Binding.Var
 import com.thoughtworks.binding.{Binding, dom}
+import example.services.MyClient
 import org.scalajs.dom.document
-import org.scalajs.dom.ext.Ajax
 import org.scalajs.dom.raw.{Event, HTMLElement}
+import api.CountAPI
+import autowire._
 
-import scala.scalajs.concurrent.JSExecutionContext.Implicits.queue
 import scala.scalajs.js
-import scala.scalajs.js.JSON
 
-
+import scala.concurrent.ExecutionContext.Implicits.global
 
 object ScalaJSExample extends js.JSApp {
 
@@ -21,11 +21,12 @@ object ScalaJSExample extends js.JSApp {
     * of requests to count.
     * @param data
     */
-  def countRequest(data: Var[String]) = {
-    val url = "http://localhost:9000/count"
-    Ajax.get(url).foreach { case xhr =>
-      data.value = JSON.parse(xhr.responseText).count.toString
-    }
+  def countRequest(data: Var[String]): Unit = {
+//    val url = "http://localhost:9000/count"
+//    Ajax.get(url).foreach { case xhr =>
+//      data.value = JSON.parse(xhr.responseText).count.toString
+//    }
+    MyClient[CountAPI].count().call().foreach(c => data.value = c.toString)
   }
 
   @dom

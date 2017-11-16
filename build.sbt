@@ -9,6 +9,8 @@ lazy val server = (project in file("server")).settings(
   compile in Compile <<= (compile in Compile) dependsOn scalaJSPipeline,
   libraryDependencies ++= Seq(
     "com.vmunier" %% "scalajs-scripts" % "1.1.1",
+    "com.lihaoyi" %% "upickle" % "0.4.4",
+    "com.lihaoyi" %% "autowire" % "0.2.6",
     guice,
     filters,
     specs2 % Test
@@ -29,6 +31,8 @@ lazy val client = (project in file("client")).settings(
     "org.scala-lang.modules" %% "scala-xml" % "1.0.6",
     "com.thoughtworks.binding" %%% "dom" % "11.0.0-M4",
     "com.thoughtworks.binding" %%% "futurebinding" % "11.0.0-M4",
+    "com.lihaoyi" %%% "upickle" % "0.4.4",
+    "com.lihaoyi" %%% "autowire" % "0.2.6",
     "fr.hmil" %%% "roshttp" % "2.0.2"
   )
 ).enablePlugins(ScalaJSPlugin, ScalaJSWeb).
