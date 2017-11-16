@@ -1,4 +1,4 @@
-lazy val scalaV = "2.12.2"
+lazy val scalaV = "2.12.4"
 
 lazy val server = (project in file("server")).settings(
   scalaVersion := scalaV,
@@ -22,15 +22,15 @@ lazy val server = (project in file("server")).settings(
 
 lazy val client = (project in file("client")).settings(
   scalaVersion := scalaV,
-  persistLauncher := true,
   scalacOptions ++= Seq("-Xmax-classfile-name","78"),
   persistLauncher in Test := false,
-  addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
+  scalaJSUseMainModuleInitializer := true,
+    addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
   libraryDependencies ++= Seq(
-    "org.scala-js" %%% "scalajs-dom" % "0.9.1",
+    "org.scala-js" %%% "scalajs-dom" % "0.9.3",
     "org.scala-lang.modules" %% "scala-xml" % "1.0.6",
-    "com.thoughtworks.binding" %%% "dom" % "11.0.0-M4",
-    "com.thoughtworks.binding" %%% "futurebinding" % "11.0.0-M4",
+    "com.thoughtworks.binding" %%% "dom" % "11.0.0-M5",
+    "com.thoughtworks.binding" %%% "futurebinding" % "11.0.0-M5",
     "com.lihaoyi" %%% "upickle" % "0.4.4",
     "com.lihaoyi" %%% "autowire" % "0.2.6",
     "fr.hmil" %%% "roshttp" % "2.0.2"

@@ -12,7 +12,7 @@ import scala.scalajs.js
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
-object ScalaJSExample extends js.JSApp {
+object ScalaJSExample {
 
   implicit def makeIntellijHappy(x: scala.xml.Elem): Binding[HTMLElement] = ???
 
@@ -22,10 +22,6 @@ object ScalaJSExample extends js.JSApp {
     * @param data
     */
   def countRequest(data: Var[String]): Unit = {
-//    val url = "http://localhost:9000/count"
-//    Ajax.get(url).foreach { case xhr =>
-//      data.value = JSON.parse(xhr.responseText).count.toString
-//    }
     MyClient[CountAPI].count().call().foreach(c => data.value = c.toString)
   }
 
@@ -41,7 +37,9 @@ object ScalaJSExample extends js.JSApp {
     </div>
   }
 
-  def main(): Unit = {
+  def main(args: Array[String]): Unit = {
+    println("Here")
     dom.render(document.body, render)
   }
+
 }
